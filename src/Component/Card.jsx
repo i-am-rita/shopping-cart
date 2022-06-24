@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 import CartContext from "../CartContext";
 
-const Card = ({ item}) => {
-  const { addToCart } = useContext(CartContext);
+const Card = ({ item }) => {
+  // const [cart, setCart] = useState(0);
+  const { cartItem, setCartItem } = useContext(CartContext);
   const { id, img, name, price } = item;
   return (
     <Card.Wrapper>
@@ -13,14 +14,27 @@ const Card = ({ item}) => {
           <img src={img} alt="laptop" width="100%" />
           <h2>{name}</h2>
           <p>${price}</p>
-          <Button
-            variant="outlined"
-            color="success"
-            // onClick={() => handleClick(item)}
-            onClick={() => addToCart( id, name, price)}
-          >
-            Add to cart
-          </Button>
+          {cartItem.includes(item) ? (
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={() => {
+                setCartItem(cartItem.filter((prod) => prod.id !== item.id));
+              }}
+            >
+              Remove from cart
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={() => {
+                setCartItem([...cartItem, item]);
+              }}
+            >
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </Card.Wrapper>

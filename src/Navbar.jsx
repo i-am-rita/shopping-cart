@@ -30,7 +30,7 @@ const Navbar = () => {
           />
           <Link to="/CheckoutPage" style={{ textDecoration: "none" }}>
             <ShoppingCartIcon style={{ color: "#fff" }} />
-            <span style={{ color: "#fff" }}>{cartItem.length}</span>
+            <span style={{ color: "#fff" }}>({cartItem.length})</span>
           </Link>
         </form>
         {/* </nav> */}
